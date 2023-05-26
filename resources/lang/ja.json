@@ -1,0 +1,13 @@
+{
+    "Email": "Eメールアドレス",
+    "Password": "パスワード",
+    "Confirm Password": "パスワード確認",
+    "Remember me": "ログイン状態を記憶させる",
+    "Forgot your password?": "パスワードをお忘れですか？",
+    "Log in": "ログイン",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "メールアドレスを入力してください。新しいパスワードを設定するリンクをメールに送信します。",
+    "Email Password Reset Link": "メールを送信",
+    "Whoops! Something went wrong.": "ログインエラー",
+    "Log Out": "ログアウト",
+    "Confirm": "確認"
+}
