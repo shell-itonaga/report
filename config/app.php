@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://shellele.shop'),
+    'url' => env('APP_URL', 'https://report.shell-techno.com');
 
     'asset_url' => env('ASSET_URL', null),
 
