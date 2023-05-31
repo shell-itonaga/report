@@ -83,7 +83,8 @@ class OutSoucerController extends Controller
     {
         $users = User::where('is_delete_flg', '=', false)->where('user_authority', '=', Role::Outsourcer)->paginate(50);
         Log::debug(__FILE__." [".__FUNCTION__."():".__LINE__."] Request:".var_export($users, true));
-        return View('config.out-soucer.list.index', ['users' => $users, 'user_count' => $users->total()]);
+        /*return View('config.out-soucer.list.index', ['users' => $users, 'user_count' => $users->total()]);*/
+        return View('other-config.out-soucer.list.index', ['users' => $users, 'user_count' => $users->total()]);
     }
 
     /**

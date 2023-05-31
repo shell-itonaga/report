@@ -32,6 +32,16 @@ Route::get('/menu', function () {
     return view('menu');
 })->middleware(['auth'])->name('menu');
 
+Route::prefix('other-config')->group(function() {
+    // 404 NOT FOUND対策
+    Route::get('/', function () { return redirect('/menu'); });
+    Route::prefix('out-soucer')->group(function() {
+        Route::prefix('list')->group(function() {
+            Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
+        });
+    });
+});
+
 // 各種設定(管理者のみ)
 Route::prefix('config')->group(function() {
     // 404 NOT FOUND対策
@@ -45,7 +55,7 @@ Route::prefix('config')->group(function() {
         });
         // 外注一覧
         Route::prefix('list')->group(function() {
-            Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
+            //Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
             Route::get('search', [OutSoucerController::class, 'search'])->middleware(['auth'])->name('list.out-soucer.search');
         });
         // 外注編集
