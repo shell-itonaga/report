@@ -32,9 +32,10 @@ Route::get('/menu', function () {
     return view('menu');
 })->middleware(['auth'])->name('menu');
 
-Route::prefix('other-config')->group(function() {
+Route::prefix('settings')->group(function() {
     // 404 NOT FOUND対策
     Route::get('/', function () { return redirect('/menu'); });
+    // 外注
     Route::prefix('out-soucer')->group(function() {
         Route::prefix('list')->group(function() {
             Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
