@@ -18,7 +18,8 @@ class UnitNoController extends Controller
     public function listIndex()
     {
         $unitNumbers = UnitNumber::where('is_delete_flg', '=', false)->paginate(30);
-        return View('config.unit-no.index', ['unitNumbers' => $unitNumbers, 'total_count' => $unitNumbers->total()]);
+        //return View('config.unit-no.index', ['unitNumbers' => $unitNumbers, 'total_count' => $unitNumbers->total()]);
+        return View('settings.unit-no.index', ['unitNumbers' => $unitNumbers, 'total_count' => $unitNumbers->total()]);
     }
 
     /**
@@ -31,7 +32,8 @@ class UnitNoController extends Controller
     {
         $request->flash();
         $unitNumbers = UnitNumber::where('is_delete_flg', '=', false)->where('unit_no_name', 'LIKE', "%$request->unit_name%")->paginate(30);
-        return View('config.unit-no.index', ['unitNumbers' => $unitNumbers, 'total_count' => $unitNumbers->total()]);
+        //return View('config.unit-no.index', ['unitNumbers' => $unitNumbers, 'total_count' => $unitNumbers->total()]);
+        return View('settings.unit-no.index', ['unitNumbers' => $unitNumbers, 'total_count' => $unitNumbers->total()]);
     }
 
     /**
@@ -87,7 +89,8 @@ class UnitNoController extends Controller
             session()->flash('is_error', true);
         }
 
-        return redirect()->to('config/unit-no/complete');
+        //return redirect()->to('config/unit-no/complete');
+        return redirect()->to('settings/unit-no/complete');
 
     }
 

@@ -30,7 +30,8 @@ class WorkDetailController extends Controller
                                   orderBy('id')->
                                   get();
 
-        return View('config.work-detail.insert.index',['workTypes' => $workTypes, 'workClasses' => $workClasses]);
+        //return View('config.work-detail.insert.index',['workTypes' => $workTypes, 'workClasses' => $workClasses]);
+        return View('settings.work-detail.insert.index',['workTypes' => $workTypes, 'workClasses' => $workClasses]);
     }
 
     /**
@@ -48,7 +49,8 @@ class WorkDetailController extends Controller
             $workClasses = WorkClass::where('is_delete_flg', '=', false)->orderBy('work_type_id')->orderBy('id')->get();
             $request->flash();
             session()->flash('is_duplicate', true);
-            return View('config.work-detail.insert.index',['workTypes' => $workTypes, 'workClasses' => $workClasses]);
+            //return View('config.work-detail.insert.index',['workTypes' => $workTypes, 'workClasses' => $workClasses]);
+            return View('settings.work-detail.insert.index',['workTypes' => $workTypes, 'workClasses' => $workClasses]);
 
         } else {
 
@@ -69,7 +71,8 @@ class WorkDetailController extends Controller
                 session()->flash('is_error', true);
             }
 
-            return redirect()->to('config/work-detail/insert/complete');
+            //return redirect()->to('config/work-detail/insert/complete');
+            return redirect()->to('settings/work-detail/insert/complete');
         }
     }
 
@@ -111,7 +114,8 @@ class WorkDetailController extends Controller
                         orderBy('work_details.id')->
                         paginate(20);
 
-        return View('config.work-detail.edit.index',['workTypes' => $workTypes, 'workClasses' => $workClasses, 'workDetails' => $workDetails, 'total_count' => $workDetails->total()]);
+        //return View('config.work-detail.edit.index',['workTypes' => $workTypes, 'workClasses' => $workClasses, 'workDetails' => $workDetails, 'total_count' => $workDetails->total()]);
+        return View('settings.work-detail.edit.index',['workTypes' => $workTypes, 'workClasses' => $workClasses, 'workDetails' => $workDetails, 'total_count' => $workDetails->total()]);
     }
 
     /**
@@ -145,7 +149,8 @@ class WorkDetailController extends Controller
         $workTypes   = WorkType::where('is_delete_flg',  '=', false)->orderBy('id')->get();
         $workClasses = WorkClass::where('is_delete_flg', '=', false)->orderBy('work_type_id')->orderBy('id')->get();
 
-        return View('config.work-detail.edit.index',['workTypes' => $workTypes, 'workClasses' => $workClasses, 'workDetails' => $workDetails, 'total_count' => $workDetails->total()]);
+        //return View('config.work-detail.edit.index',['workTypes' => $workTypes, 'workClasses' => $workClasses, 'workDetails' => $workDetails, 'total_count' => $workDetails->total()]);
+        return View('settings.work-detail.edit.index',['workTypes' => $workTypes, 'workClasses' => $workClasses, 'workDetails' => $workDetails, 'total_count' => $workDetails->total()]);
     }
 
     /***
@@ -179,7 +184,8 @@ class WorkDetailController extends Controller
             session()->flash('is_error', true);
         }
 
-        return redirect()->to('config/work-detail/edit/complete');
+        //return redirect()->to('config/work-detail/edit/complete');
+        return redirect()->to('settings/work-detail/edit/complete');
     }
 
     /**

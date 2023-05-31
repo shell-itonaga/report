@@ -25,22 +25,26 @@ class OutSoucerController extends Controller
             $isEmailDuplicate = $this->emailDuplicateCheck($request);
             if ($isEmailDuplicate) {
                 // 同メールアドレスが登録済み
-                return View('config.out-soucer.error', ['postData' => $request]);
+                //return View('config.out-soucer.error', ['postData' => $request]);
+                return View('settings.out-soucer.error', ['postData' => $request]);
             }
             // 確認画面の表示
-            return View('config.out-soucer.insert.confirm', ['postData' => $request]);
+            //return View('config.out-soucer.insert.confirm', ['postData' => $request]);
+            return View('settings.out-soucer.insert.confirm', ['postData' => $request]);
 
         } else {
 
             try {
                 // ユーザ登録
                 $user_id = $this->insertData($request);
-                return View('config.out-soucer.insert.complete', ['postData' => $request, 'user_id' => $user_id]);
+                //return View('config.out-soucer.insert.complete', ['postData' => $request, 'user_id' => $user_id]);
+                return View('settings.out-soucer.insert.complete', ['postData' => $request, 'user_id' => $user_id]);
             } catch (Exception $e) {
                 report($e);
                 Log::error("[" . __FILE__ . " " . __FUNCTION__ . ":" . __LINE__ . "] Exception:".$e);
                 session()->flash('message', "DBの登録に失敗しました:");
-                return View('config.out-soucer.insert.complete');
+                //return View('config.out-soucer.insert.complete');
+                return View('settings.out-soucer.insert.complete');
             }
         }
     }
@@ -98,7 +102,8 @@ class OutSoucerController extends Controller
         $request->flash();
         $users = User::where('is_delete_flg', '=', false)->where('user_authority', '=', Role::Outsourcer)->where('name_kana', 'LIKE', "%$request->name_kana%")->paginate(50);
         Log::debug(__FILE__." [".__FUNCTION__."():".__LINE__."] Request:".var_export($users, true));
-        return View('config.out-soucer.list.index', ['users' => $users, 'user_count' => $users->total()]);
+        //return View('config.out-soucer.list.index', ['users' => $users, 'user_count' => $users->total()]);
+        return View('settings.out-soucer.list.index', ['users' => $users, 'user_count' => $users->total()]);
     }
 
     /**
@@ -110,7 +115,8 @@ class OutSoucerController extends Controller
     public function editIndex(Request $request)
     {
         $user = User::find($request->user_id);
-        return View('config.out-soucer.edit.index', ['user' => $user]);
+        //return View('config.out-soucer.edit.index', ['user' => $user]);
+        return View('settings.out-soucer.edit.index', ['user' => $user]);
     }
 
     /**
@@ -128,15 +134,18 @@ class OutSoucerController extends Controller
             if ($isEmailDuplicate == true) {
                 $request->flash();
                 session()->flash('message', "メールアドレスが他の方と重複しているため登録できません。");
-                return View('config.out-soucer.edit.index', ['user' => $request]);
+                //return View('config.out-soucer.edit.index', ['user' => $request]);
+                return View('settings.out-soucer.edit.index', ['user' => $request]);
             }
             // 編集確認画面
-            return View('config.out-soucer.edit.confirm', ['user' => $request]);
+            //return View('config.out-soucer.edit.confirm', ['user' => $request]);
+            return View('settings.out-soucer.edit.confirm', ['user' => $request]);
 
         } else {
             // 編集内容登録処理
             $this->update($request);
-            return redirect()->to('config/out-soucer/edit/complete');
+            //return redirect()->to('config/out-soucer/edit/complete');
+            return redirect()->to('settings/out-soucer/edit/complete');
         }
     }
 

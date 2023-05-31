@@ -32,38 +32,30 @@ Route::get('/menu', function () {
     return view('menu');
 })->middleware(['auth'])->name('menu');
 
-Route::prefix('settings')->group(function() {
-    // 404 NOT FOUND対策
-    Route::get('/', function () { return redirect('/menu'); });
-    // 外注
-    Route::prefix('out-soucer')->group(function() {
-        Route::prefix('list')->group(function() {
-            Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
-        });
-    });
-});
-
 // 各種設定(管理者のみ)
-Route::prefix('config')->group(function() {
+//Route::prefix('config')->group(function() {
+Route::prefix('settings')->group(function() {
     // 404 NOT FOUND対策
     Route::get('/', function () { return redirect('/menu'); });
     // 外注
     Route::prefix('out-soucer')->group(function() {
         // 外注新規登録
         Route::prefix('insert')->group(function() {
-            Route::get('/', function () { return View('config.out-soucer.insert.index'); })->middleware(['auth'])->name('insert.out-soucer.index');
+            //Route::get('/', function () { return View('config.out-soucer.insert.index'); })->middleware(['auth'])->name('insert.out-soucer.index');
+            Route::get('/', function () { return View('settings.out-soucer.insert.index'); })->middleware(['auth'])->name('insert.out-soucer.index');
             Route::post('confirm', [OutSoucerController::class, 'insertConfirm'])->middleware(['auth'])->name('insert.out-soucer.confirm');
         });
         // 外注一覧
         Route::prefix('list')->group(function() {
-            //Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
+            Route::get('/', [OutSoucerController::class, 'listIndex'])->middleware(['auth'])->name('list.out-soucer.index');
             Route::get('search', [OutSoucerController::class, 'search'])->middleware(['auth'])->name('list.out-soucer.search');
         });
         // 外注編集
         Route::prefix('edit')->group(function() {
             Route::get('/', [OutSoucerController::class, 'editIndex'])->middleware(['auth'])->name('edit.out-soucer.index');
             Route::post('confirm', [OutSoucerController::class, 'editConfirm'])->middleware(['auth'])->name('edit.out-soucer.confirm');
-            Route::get('complete', function () { return View('config.out-soucer.edit.complete'); })->middleware(['auth'])->name('edit.out-soucer.complete');
+            //Route::get('complete', function () { return View('config.out-soucer.edit.complete'); })->middleware(['auth'])->name('edit.out-soucer.complete');
+            Route::get('complete', function () { return View('settings.out-soucer.edit.complete'); })->middleware(['auth'])->name('edit.out-soucer.complete');
         });
     });
 
@@ -72,7 +64,8 @@ Route::prefix('config')->group(function() {
         Route::get('/', [UnitNoController::class, 'listIndex'])->middleware(['auth'])->name('list.unit-no.index');
         Route::get('search', [UnitNoController::class, 'search'])->middleware(['auth'])->name('list.unit-no.search');
         Route::post('upsert', [UnitNoController::class, 'upsert'])->middleware(['auth'])->name('list.unit-no.upsert');
-        Route::get('complete', function () { return View('config.unit-no.complete'); })->middleware(['auth'])->name('list.unit-no.complete');
+        //Route::get('complete', function () { return View('config.unit-no.complete'); })->middleware(['auth'])->name('list.unit-no.complete');
+        Route::get('complete', function () { return View('settings.unit-no.complete'); })->middleware(['auth'])->name('list.unit-no.complete');
     });
 
     // 作業区分
@@ -81,14 +74,16 @@ Route::prefix('config')->group(function() {
         Route::prefix('insert')->group(function() {
             Route::get('/', [WorkClassController::class, 'insertIndex'])->middleware(['auth'])->name('insert.work-class.index');
             Route::post('data-insert', [WorkClassController::class, 'insert'])->middleware(['auth'])->name('insert.work-class.insert');
-            Route::get('complete', function() { return View('config.work-class.insert.complete'); })->middleware(['auth'])->name('insert.work-class.complete');
+            //Route::get('complete', function() { return View('config.work-class.insert.complete'); })->middleware(['auth'])->name('insert.work-class.complete');
+            Route::get('complete', function() { return View('settings.work-class.insert.complete'); })->middleware(['auth'])->name('insert.work-class.complete');
         });
         // 編集
         Route::prefix('edit')->group(function() {
             Route::get('/', [WorkClassController::class, 'listIndex'])->middleware(['auth'])->name('edit.work-class.index');
             Route::get('search', [WorkClassController::class, 'search'])->middleware(['auth'])->name('edit.work-class.search');
             Route::post('update', [WorkClassController::class, 'update'])->middleware(['auth'])->name('edit.work-class.update');
-            Route::get('complete', function() { return View('config.work-class.edit.complete'); })->middleware(['auth'])->name('edit.work-class.complete');
+            //Route::get('complete', function() { return View('config.work-class.edit.complete'); })->middleware(['auth'])->name('edit.work-class.complete');
+            Route::get('complete', function() { return View('settings.work-class.edit.complete'); })->middleware(['auth'])->name('edit.work-class.complete');
         });
     });
 
@@ -98,14 +93,16 @@ Route::prefix('config')->group(function() {
         Route::prefix('insert')->group(function() {
             Route::get('/', [WorkDetailController::class, 'insertIndex'])->middleware(['auth'])->name('insert.work-detail.index');
             Route::post('data-insert', [WorkDetailController::class, 'insert'])->middleware(['auth'])->name('insert.work-detail.insert');
-            Route::get('complete', function() { return View('config.work-detail.insert.complete'); })->middleware(['auth'])->name('insert.work-detail.complete');
+            //Route::get('complete', function() { return View('config.work-detail.insert.complete'); })->middleware(['auth'])->name('insert.work-detail.complete');
+            Route::get('complete', function() { return View('settings.work-detail.insert.complete'); })->middleware(['auth'])->name('insert.work-detail.complete');
         });
         // 編集
         Route::prefix('edit')->group(function() {
             Route::get('/', [WorkDetailController::class, 'listIndex'])->middleware(['auth'])->name('edit.work-detail.index');
             Route::get('search', [WorkDetailController::class, 'search'])->middleware(['auth'])->name('edit.work-detail.search');
             Route::post('update', [WorkDetailController::class, 'update'])->middleware(['auth'])->name('edit.work-detail.update');
-            Route::get('complete', function() { return View('config.work-detail.edit.complete'); })->middleware(['auth'])->name('edit.work-detail.complete');
+            //Route::get('complete', function() { return View('config.work-detail.edit.complete'); })->middleware(['auth'])->name('edit.work-detail.complete');
+            Route::get('complete', function() { return View('settings.work-detail.edit.complete'); })->middleware(['auth'])->name('edit.work-detail.complete');
         });
     });
 });
