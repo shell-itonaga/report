@@ -19,7 +19,7 @@
         <!-- custom CSS -->
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <!-- Favicons -->
-        <link rel="icon" href="{{ asset('img/logo_mark_1089.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('img/logo_mark.png') }}" type="image/png">
         <!-- tailWind js -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 @if (request()->is('*report*') || request()->is('*summary*') || request()->is('*manage*') || request()->is('*list*'))

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00008b">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('menu') }}">
-            <img src="{{ asset('img/logo_mark_1089.png') }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="{{ asset('img/logo_mark.png') }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
             日報管理システム
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
