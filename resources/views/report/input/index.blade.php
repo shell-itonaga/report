@@ -18,8 +18,9 @@
             <div class="row-auto">
                 <x-label for="work_date" class="col-form-label">作業日付<span class="badge bg-danger mx-2 my-0">必須</span></x-label>
                 <!-- 一時的に1か月前まで入力可能とする 2012/10/1まで -->
+                <!-- 2か月前まで入力可能とする 2023/6/1 -->
                 {{-- <input type="date" class="form-control" max="{{ date('Y-m-d') }}" min="{{ date('Y-m-d', strtotime("-1 week")) }}" required value="{{ empty(old('work_date')) ? date('Y-m-d') : old('work_date') }}" id="work_date" name="work_date"> --}}
-                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" min="{{ date('Y-m-d', strtotime("-1 month")) }}" required value="{{ old('work_date', date('Y-m-d')) }}" id="work_date" name="work_date">
+                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" min="{{ date('Y-m-d', strtotime("-2 month")) }}" required value="{{ old('work_date', date('Y-m-d')) }}" id="work_date" name="work_date">
                 <div class="invalid-feedback bg-red-200 p-2 rounded"><i class="fas fa-exclamation-circle"></i>&nbsp;日付が指定されていないか、入力値が無効です</div>
             </div>
 
