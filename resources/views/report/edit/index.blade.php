@@ -12,9 +12,11 @@
                 <div class="my-2 px-2 py-2 rounded-lg border-gray-300 border-1 bg-white">
                     <form name="input" class="mx-auto" method="GET" action="{{ route('edit.search') }}">
 @csrf
-                        <label for="date_edit" class="col-form-label mr-2"><i class="fas fa-info-circle text-blue-700"></i> 日付を選択して下さい（７日前まで選択可）</label>
+                        <!-- 2か月前まで入力可能とする 2023/6/12 -->
+                        {{-- <label for="date_edit" class="col-form-label mr-2"><i class="fas fa-info-circle text-blue-700"></i> 日付を選択して下さい（７日前まで選択可）</label> --}}
+                        <label for="date_edit" class="col-form-label mr-2"><i class="fas fa-info-circle text-blue-700"></i> 日付を選択して下さい（２ヵ月前まで選択可）</label>
                         {{-- <input type="date" class="form-control" min="{{ date('Y-m-d', strtotime("-1 week")) }}" max="{{ date('Y-m-d') }}" value="{{ empty(old('date_edit')) ? date('Y-m-d') : old('date_edit') }}" id="date_edit" name="date_edit" required> --}}
-                        <input type="date" class="form-control" min="{{ date('Y-m-d', strtotime("-1 month")) }}" max="{{ date('Y-m-d') }}" value="{{ empty(old('date_edit')) ? date('Y-m-d') : old('date_edit') }}" id="date_edit" name="date_edit" required>
+                        <input type="date" class="form-control" min="{{ date('Y-m-d', strtotime("-2 month")) }}" max="{{ date('Y-m-d') }}" value="{{ empty(old('date_edit')) ? date('Y-m-d') : old('date_edit') }}" id="date_edit" name="date_edit" required>
                         <div class="mx-auto mt-4 text-center">
                             <button class="btn btn-primary btn-lg mx-2" type="submit"> 検&emsp;索 </button>
                         </div>
