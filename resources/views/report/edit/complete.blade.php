@@ -13,7 +13,7 @@
 @endif
             <div class="text-center my-5">
                 <a class="btn btn-lg btn-success btn-wide" href="{{ route('menu') }}">TOPに戻る</a>
-                <a class="btn btn-lg btn-primary btn-wide" href="{{ route('edit.index') }}">日報一覧に戻る</a>
+                <a class="btn btn-lg btn-primary btn-wide" href="{{ route('edit.index') }}">日報修正に戻る</a>
             </div>
         </div>
     </div>

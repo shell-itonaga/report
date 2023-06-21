@@ -334,6 +334,7 @@ class ManageController extends Controller
     private function update(Request $request)
     {
         $workTime = WorkTime::find($request->edit_id);
+        $workTime->customer_code  = $request->customer_code;    //2023-06-21追加
         $workTime->work_date      = $request->work_date;
         $workTime->order_id       = $request->order_id;
         $workTime->serial_id      = $request->serial_id;

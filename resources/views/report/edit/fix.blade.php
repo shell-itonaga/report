@@ -19,8 +19,11 @@
 
             <div class="row-auto">
                 <x-label for="work_date" class="col-form-label">作業日付<span class="badge bg-danger mx-2 my-0">必須</span></x-label>
-                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" min="{{ date('Y-m-d', strtotime("-1 week")) }}" required value="{{ old('work_date', $selection->work_date) }}" id="work_date" name="work_date">
-                <div class="invalid-feedback bg-red-200 p-2 rounded"><i class="fas fa-exclamation-circle"></i> 日付が指定されていない、または作業日付が1週間以上経過しています</div>
+                <!-- 2か月前まで入力可能とする 2023/6/21 -->
+                <!-- <input type="date" class="form-control" max="{{ date('Y-m-d') }}" min="{{ date('Y-m-d', strtotime("-1 week")) }}" required value="{{ old('work_date', $selection->work_date) }}" id="work_date" name="work_date"> -->
+                <input type="date" class="form-control" max="{{ date('Y-m-d') }}" min="{{ date('Y-m-d', strtotime("-2 month")) }}" required value="{{ old('work_date', $selection->work_date) }}" id="work_date" name="work_date">
+                <!-- <div class="invalid-feedback bg-red-200 p-2 rounded"><i class="fas fa-exclamation-circle"></i> 日付が指定されていない、または作業日付が1週間以上経過しています</div> -->
+                <div class="invalid-feedback bg-red-200 p-2 rounded"><i class="fas fa-exclamation-circle"></i> 日付が指定されていない、または作業日付が２ヵ月前以上経過しています</div>
             </div>
 
             <!-- 得意先名 -->
@@ -128,7 +131,7 @@
             <div class="d-grid gap-2 d-md-block text-center mx-auto my-4">
                 <button type="button" class="btn btn-lg btn-success mx-2 my-2" onclick="history.back()">戻&emsp;る</button>
                 <button class="btn btn-danger btn-lg mx-2" type="submit" name="submit" id="delete" value="delete">削&emsp;除</button>
-                <button class="btn btn-primary btn-lg mx-2" type="submit" name="submit" id="edit" value="edit">登録確認</button>
+                <button class="btn btn-primary btn-lg mx-2" type="submit" name="submit" id="edit" value="edit">修正確認</button>
             </div>
 
         </div><!-- form-Group -->
