@@ -103,13 +103,16 @@ class SummaryController extends Controller
 
         if (!empty($request->name_kana)) {
             $semi_kana = mb_convert_kana($request->name_kana, 'k');
-            $search->where('name_kana', 'LIKE', "%$semi_kana%");
+            //$search->where('name_kana', 'LIKE', "%$semi_kana%");
+            $search->where('users.name_kana', 'LIKE', "%$semi_kana%");
         }
         if (!empty($request->date_from)) {
-            $search->where('work_date', '>=', $request->date_from);
+            //$search->where('work_date', '>=', $request->date_from);
+            $search->where('work_times.work_date', '>=', $request->date_from);
         }
         if (!empty($request->date_to)) {
-            $search->where('work_date', '<=', $request->date_to);
+            //$search->where('work_date', '<=', $request->date_to);
+            $search->where('work_times.work_date', '<=', $request->date_to);
         }
         if ($request->customer_code > 0) {
             $search->where('work_times.customer_code', '=', $request->customer_code);
@@ -117,7 +120,8 @@ class SummaryController extends Controller
         if ($request->order_id > 0) {
             $search->where('work_times.order_id', '=', $request->order_id);
         }
-        if ($request->serial_id > 0) {
+        //if ($request->serial_id > 0) {
+        if (!empty($request->serial_id) && $request->serial_id > 0) {
             $search->where('work_times.serial_id', '=', $request->serial_id);
         }
         if ($request->unit_id > 0) {
@@ -129,11 +133,29 @@ class SummaryController extends Controller
         if ($request->work_class > 0) {
             $search->where('work_times.work_class_id', '=', $request->work_class);
         }
-        if ($request->work_detail > 0) {
+        //if ($request->work_detail > 0) {
+        if (!empty($request->work_detail) && $request->work_detail > 0) {
             $search->where('work_times.work_detail_id', '=', $request->work_detail);
         }
         // 検索結果取得
-        $summarys = $search->orderBy('work_times.work_date')->
+        $summarys = $search->select("work_times.id",
+                                    "work_times.work_date",
+                                    "customers.id as customers_id",
+                                    "customers.customer_name",
+                                    "users.name",
+                                    "orders.order_no",
+                                    "orders.order_name",
+                                    "serial_numbers.serial_no",
+                                    "serial_numbers.serial_name",
+                                    "unit_numbers.unit_no_name",
+                                    "work_times.device_name",
+                                    "work_times.unit_name",
+                                    "work_types.work_type_name",
+                                    "work_classes.work_class_name",
+                                    "work_details.work_detail_name",
+                                    "work_times.work_time",
+                                    "work_times.remarks")->
+                             orderBy('work_times.work_date')->
                              orderBy('work_times.customer_code')->
                              orderBy('work_times.user_id')->
                              orderBy('work_times.order_id')->
@@ -208,13 +230,16 @@ class SummaryController extends Controller
 
             if (!empty($request->name_kana)) {
                 $semi_kana = mb_convert_kana($request->name_kana, 'k');
-                $search->where('name_kana', 'LIKE', "%$semi_kana%");
+                //$search->where('name_kana', 'LIKE', "%$semi_kana%");
+                $search->where('users.name_kana', 'LIKE', "%$semi_kana%");
             }
             if (!empty($request->date_from)) {
-                $search->where('work_date', '>=', $request->date_from);
+                //$search->where('work_date', '>=', $request->date_from);
+                $search->where('work_times.work_date', '>=', $request->date_from);
             }
             if (!empty($request->date_to)) {
-                $search->where('work_date', '<=', $request->date_to);
+                //$search->where('work_date', '<=', $request->date_to);
+                $search->where('work_times.work_date', '<=', $request->date_to);
             }
             if ($request->customer_code > 0) {
                 $search->where('work_times.customer_code', '=', $request->customer_code);
@@ -222,7 +247,8 @@ class SummaryController extends Controller
             if ($request->order_id > 0) {
                 $search->where('work_times.order_id', '=', $request->order_id);
             }
-            if ($request->serial_id > 0) {
+            //if ($request->serial_id > 0) {
+            if (!empty($request->serial_id) && $request->serial_id > 0) {
                 $search->where('work_times.serial_id', '=', $request->serial_id);
             }
             if ($request->unit_id > 0) {
@@ -234,12 +260,29 @@ class SummaryController extends Controller
             if ($request->work_class > 0) {
                 $search->where('work_times.work_class_id', '=', $request->work_class);
             }
-            if ($request->work_detail > 0) {
+            //if ($request->work_detail > 0) {
+            if (!empty($request->work_detail) && $request->work_detail > 0) {
                 $search->where('work_times.work_detail_id', '=', $request->work_detail);
             }
-
             // 検索結果取得
-            $summarys = $search->orderBy('work_times.work_date')->
+            $summarys = $search->select("work_times.id",
+                                        "work_times.work_date",
+                                        "customers.id as customers_id",
+                                        "customers.customer_name",
+                                        "users.name",
+                                        "orders.order_no",
+                                        "orders.order_name",
+                                        "serial_numbers.serial_no",
+                                        "serial_numbers.serial_name",
+                                        "unit_numbers.unit_no_name",
+                                        "work_times.device_name",
+                                        "work_times.unit_name",
+                                        "work_types.work_type_name",
+                                        "work_classes.work_class_name",
+                                        "work_details.work_detail_name",
+                                        "work_times.work_time",
+                                        "work_times.remarks")->
+                                 orderBy('work_times.work_date')->
                                  orderBy('work_times.customer_code')->
                                  orderBy('work_times.user_id')->
                                  orderBy('work_times.order_id')->
@@ -251,7 +294,11 @@ class SummaryController extends Controller
 
             if ($summarys->count() > 0) {
                 // 条件に該当するデータあり
+                $errcnt = 0;
                 foreach ($summarys as $val) {
+                    if (strpos($val->serial_no, $val->order_no) === false) {
+                        $errcnt ++;
+                    }
                     $csv = [
                         $val->name,
                         $val->work_date,
@@ -268,9 +315,40 @@ class SummaryController extends Controller
                         $val->work_detail_name,
                         sprintf("%.2f", $val->work_time),
                         $val->remarks,
-                    ];
+                    ];    
                     mb_convert_variables('SJIS-win', 'UTF-8', $csv);
                     fputcsv($createCsvFile, $csv);
+                }
+                if ($errcnt > 0) {
+                    $columns = [''];
+                    fputcsv($createCsvFile, $columns);
+                    $columns = ['！！！エラーデータ検出！！！'];
+                    mb_convert_variables('SJIS-win', 'UTF-8', $columns);
+                    fputcsv($createCsvFile, $columns);
+
+                    foreach ($summarys as $val) {
+                        if (strpos($val->serial_no, $val->order_no) === false) {
+                            $csv = [
+                                $val->name,
+                                $val->work_date,
+                                $val->customer_name,
+                                $val->order_no,
+                                $val->order_name,
+                                $val->serial_no,
+                                $val->serial_name,
+                                $val->unit_no_name,
+                                $val->device_name,
+                                $val->unit_name,
+                                $val->work_type_name,
+                                $val->work_class_name,
+                                $val->work_detail_name,
+                                sprintf("%.2f", $val->work_time),
+                                $val->remarks,
+                            ];    
+                            mb_convert_variables('SJIS-win', 'UTF-8', $csv);
+                            fputcsv($createCsvFile, $csv);
+                        }
+                    }
                 }
             }
 
