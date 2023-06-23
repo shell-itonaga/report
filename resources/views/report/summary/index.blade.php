@@ -114,6 +114,8 @@
                                 <button class="btn btn-primary btn-lg mx-2" type="submit"> 検&emsp;索 </button>
                                 <!-- CSV出力ボタン追加対応 -->
                                 <button class="btn btn-primary btn-lg mx-2" type="submit" formmethod="POST" formaction="{{ route('summary.csvoutput') }}"> CSV出力 </button>
+                                <!-- エラーチェックボタン追加対応 2023/6/23 -->
+                                <button class="btn btn-primary btn-lg mx-2" type="submit" formmethod="POST" formaction="{{ route('summary.errcheck') }}"> ｴﾗｰﾁｪｯｸ＆出力 </button>
                             </div>
                         </form>
 

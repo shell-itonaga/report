@@ -140,6 +140,8 @@ Route::prefix('report')->group(function () {
         Route::get('search', [SummaryController::class, 'search'])->middleware(['auth'])->name('summary.search');
         // CSV出力ボタン追加対応
         Route::post('csvoutput', [SummaryController::class, 'csvoutput'])->middleware(['auth'])->name('summary.csvoutput');
+        // エラーチェックボタン追加対応 2023/6/23
+        Route::post('errcheck', [SummaryController::class, 'errcheck'])->middleware(['auth'])->name('summary.errcheck');
     });
     // 日報管理(管理者のみ)
     Route::prefix('manage')->group(function () {

@@ -10,6 +10,12 @@
         <div class="alert alert-danger max-w-3xl mx-auto mt-2 text-sm md:text-xl" role="alert">同じ内容の日報が既に登録済みです。</div>
     </div>
 @endif
+<!-- 受注Noと製番の不一致チェックの追加対応 2023/6/23 -->
+@if (session()->has('is_not_equal'))
+    <div class="text-center mx-2">
+        <div class="alert alert-danger max-w-3xl mx-auto mt-2 text-sm md:text-xl" role="alert">受注番号と製番が一致していません。</div>
+    </div>
+@endif
 
     <form name="input" class="max-w-3xl mx-auto px-3 needs-validation" novalidate method="POST" action="{{ route('edit.confirm') }}">
 @csrf

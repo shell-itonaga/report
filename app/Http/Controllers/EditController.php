@@ -172,6 +172,14 @@ class EditController extends Controller
                 return back()->withInput();
 
             } else {
+                // 受注Noと製番が不一致していないかチェック  ※受注Noと製番の不一致チェックの追加対応 2023/6/23
+                $isNotEqual = $this->isNotEqual($request);
+                if ($isNotEqual == true) {
+                    Log::debug("[" . __FILE__ . " " . __FUNCTION__ . ":" . __LINE__ . "] end");
+                    session()->flash('is_not_equal', true);
+                    return back()->withInput();
+                }
+
                 // 登録確認画面表示
                 $customer     = Customer::where("customer_code", "=", $request->customer_code)->first();
                 $order        = Order::find($request->order_id);
@@ -225,7 +233,7 @@ class EditController extends Controller
         $workTime->save();
     }
 
-        /**
+    /**
      * 作業内容の重複登録をチェックする
      *
      * @param Request $request
@@ -246,6 +254,19 @@ class EditController extends Controller
                                    where('work_date',      '=', $request->work_date)->
                                    count();
         return ($registedCount > 0) ? true : false;
+    }
+
+    /**
+     * 受注Noと製番の不一致をチェックする
+     *   ※受注Noと製番の不一致チェックの追加対応 2023/6/23
+     * @param Request $request
+     * @return boolean 不一致の場合：true
+     */
+    private function isNotEqual(Request $request)
+    {
+        $order        = Order::find($request->order_id);
+        $serialNumber = SerialNumber::find($request->serial_id);
+        return (strpos($serialNumber->serial_no, $order->order_no) === false) ? true : false;
     }
 
     /**
