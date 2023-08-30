@@ -17,7 +17,9 @@
                         <div class="row g-3 align-items-end">
                             <div class="col-sm-4">
                                 <label for="work_type" class="col-form-label">作業分類</label>
-                                <select class="form-select" id="work_type" name="work_type" required>
+                                <!-- 2023/8/30 修正 -->
+                                <!-- <select class="form-select" id="work_type" name="work_type" required> -->
+                                <select class="select-work-type form-select" id="work_type" name="work_type" required>
                                     <option value="0" @if (old('work_type') == 0 || empty(old('work_type'))) selected @endif>未選択</option>
 @foreach ($workTypes as $workType)
                                     <option value="{{ $workType->id }}" @if (old('work_type') == $workType->id) selected @endif>{{ $workType->work_type_name }}</option>
@@ -26,10 +28,14 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="work_class" class="col-form-label">作業区分</label>
-                                <select class="form-select" id="work_class" name="work_class">
+                                <!-- 2023/8/30 修正 -->
+                                <!-- <select class="form-select" id="work_class" name="work_class"> -->
+                                <select class="select-work-class form-select" id="work_class" name="work_class">
                                     <option value="0" @if (old('work_class') == 0 || empty(old('work_class'))) selected @endif>未選択</option>
 @foreach ($workClasses as $workClass)
-                                    <option class="{{ $workClass->work_type_id }}" value="{{ $workClass->id }}" @if (old('work_class') == $workClass->id) selected @endif>{{ $workClass->work_class_name }}</option>
+                                    <!-- 2023/8/30 修正 -->
+                                    <!-- <option class="{{ $workClass->work_type_id }}" value="{{ $workClass->id }}" @if (old('work_class') == $workClass->id) selected @endif>{{ $workClass->work_class_name }}</option> -->
+                                    <option data-val="{{ $workClass->work_type_id }}" value="{{ $workClass->id }}" @if (old('work_class') == $workClass->id) selected @endif>{{ $workClass->work_class_name }}</option>
 @endforeach
                                 </select>
                             </div>
