@@ -23,15 +23,20 @@
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="workType" id="workType2" value="2">
-                            <label class="form-check-label text-lg" for="workType2">電気設計</label>
+                            <!-- <label class="form-check-label text-lg" for="workType2">電気設計</label> -->
+                            <label class="form-check-label text-lg" for="workType2">設計</label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <!-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="workType" id="workType3" value="3">
                             <label class="form-check-label text-lg" for="workType3">機械設計</label>
-                        </div>
+                        </div> -->
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="workType" id="workType4" value="4">
                             <label class="form-check-label text-lg" for="workType4">基板</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="workType" id="workType3" value="3">
+                            <label class="form-check-label text-lg" for="workType3">間接業務</label>
                         </div>
                         <div>
                             <button class="btn btn-primary mx-auto my-1" type="submit"><i class="fas fa-search"></i>&nbsp;検&nbsp;索</button>

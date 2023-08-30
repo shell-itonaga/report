@@ -14,7 +14,9 @@
             <!-- 作業分類 -->
             <div class="row-auto">
                 <label for="work_type" class="col-form-label">作業分類<span class="badge bg-danger mx-2 my-0">必須</span></label>
-                <select class="form-select form-select-lg" id="work_type" name="work_type" required>
+                <!-- 2023/8/30 修正 -->
+                <!-- <select class="form-select form-select-lg" id="work_type" name="work_type" required> -->
+                <select class="select-work-type form-select form-select-lg" id="work_type" name="work_type" required>
                     <option selected disabled value="">作業分類を選択してください</option>
 @foreach ($workTypes as $workType)
                     <option value="{{ $workType->id }}" @if (old('work_type') == $workType->id) selected @endif>{{ $workType->work_type_name }}</option>
@@ -26,10 +28,14 @@
             <!-- 作業区分 -->
             <div class="row-auto">
                 <label for="work_class" class="col-form-label">作業区分<span class="badge bg-danger mx-2 my-0">必須</span></label>
-                <select class="form-select form-select-lg" id="work_class" name="work_class" required>
+                <!-- 2023/8/30 修正 -->
+                <!-- <select class="form-select form-select-lg" id="work_class" name="work_class" required> -->
+                <select class="select-work-class form-select form-select-lg" id="work_class" name="work_class" required>
                     <option selected disabled value="">作業区分を選択してください</option>
 @foreach ($workClasses as $workClass)
-                    <option class="{{ $workClass->work_type_id }}" value="{{ $workClass->id }}" @if (old('work_class') == $workClass->id) selected @endif>{{ $workClass->work_class_name }}</option>
+                    <!-- 2023/8/30 修正 -->
+                    <!-- <option class="{{ $workClass->work_type_id }}" value="{{ $workClass->id }}" @if (old('work_class') == $workClass->id) selected @endif>{{ $workClass->work_class_name }}</option> -->
+                    <option data-val="{{ $workClass->work_type_id }}" value="{{ $workClass->id }}" @if (old('work_class') == $workClass->id) selected @endif>{{ $workClass->work_class_name }}</option>
 @endforeach
                 </select>
                 <div class="invalid-feedback bg-red-200 p-2 rounded"><i class="fas fa-exclamation-circle"></i>&nbsp;作業区分が選択されていません</div>
